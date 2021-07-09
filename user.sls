@@ -1,4 +1,4 @@
-{% from "/srv/salt/users/map.jinja" import users with context %}
+ {% if grains['os_family'] == 'RedHat' %}
 
 create_user_bkoenig:
   user.present:
@@ -7,4 +7,6 @@ create_user_bkoenig:
     - shell: /bin/bash
     - home: /home/bkoenig
     - groups:
-      - {{ users.sudo_group }}
+      - wheel
+{% endif %}
+
